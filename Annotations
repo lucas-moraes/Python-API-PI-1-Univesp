@@ -1,0 +1,9 @@
+
+
+# Backend -----------------------------------------------------------#
+    Para rodar o uvicorn no usando cmd do windows:
+        cd backend        
+        python -m uvicorn app:app
+
+https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
+
