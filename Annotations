@@ -7,3 +7,9 @@
 
 https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
 
+# Frontend ----------------------------------------------------------#
+    Para rodar o Flask é preciso fazer os passos abaixo:
+        cd Frontend
+        export FLASK_APP=flask_test
+
+https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application
