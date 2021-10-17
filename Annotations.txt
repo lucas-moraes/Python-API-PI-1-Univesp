@@ -1,0 +1,27 @@
+
+# DataBase ----------------------------------------------------------#
+    SQL Server no docker
+        https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash#connect-from-outside-the-container
+
+    Prototipagem
+        https://dbdiagram.io/d/616b28ff940c4c4eec98b056
+
+
+# Backend -----------------------------------------------------------#
+    Para rodar o uvicorn no usando cmd do windows:
+        cd backend        
+        python -m uvicorn app:app
+
+    https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
+
+
+# Frontend ----------------------------------------------------------#
+    Para rodar o Flask é preciso fazer os passos abaixo:
+        cd Frontend
+        export FLASK_APP=flask_test
+
+    https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application
+
+# Diversos -----------------------------------------------------------#
+    Gerador CNS
+    https://geradornv.com.br/gerador-cns/
