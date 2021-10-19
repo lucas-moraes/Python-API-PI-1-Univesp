@@ -1,3 +1,8 @@
+instalação de packages:
+    fastapi
+    uvicorn
+    pymssql
+
 
 # DataBase ----------------------------------------------------------#
     SQL Server no docker
@@ -11,6 +16,9 @@
     Para rodar o uvicorn no usando cmd do windows:
         cd backend        
         python -m uvicorn app:app
+
+    Para arquivos python no ubuntu:
+        python3.8 ...
 
     https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
 
