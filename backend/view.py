@@ -75,6 +75,7 @@ def DeletarConsulta(id: int):
     iten = delete_controller.Delete()
     iten.DeletarConsulta(id)
 
+
 #----------------------------------------#
 #                                        #
 #  Especialidade Medicas                 #
@@ -99,4 +100,194 @@ def InserirEspecialidadMedica(post: EspecialidadeMedica):
 def DeletarEspecialidadeMedica(id: int):
     iten = delete_controller.Delete()
     iten.DeletarEspecialidadeMedica(id)
+
+@app.put('/editar-especialidade-medica')
+def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica):
+    edit_iten = update_controller.Update()
+    edit_iten.EditarEspecialidadeMedica(id, edit.desc_especialidade)
+
+
+#----------------------------------------#
+#                                        #
+#  Local Atendimento                     #
+#                                        #
+#----------------------------------------#
+
+class LocalAtendimento(BaseModel):
+    nome_local: str
+    endereco: str
+    complemento: str
+    bairro: str
+    cep: str
+    cidade: str
+    uf: str
+
+@app.get('/listar-local-atendimento')
+def ListarLocalAtendimento():
+    list = get_controller.Get()
+    return list.ListarTodosLocalAtendimento()
+
+@app.post('/inserir-local-atendimento')
+def InserirLocalAtendimento(post: LocalAtendimento):
+    iten = post_controller.Insert()
+    iten.InserirLocalAtendiemnto(
+        post.nome_local, 
+        post.endereco, 
+        post.complemento, 
+        post.bairro, 
+        post.cep, 
+        post.cidade, 
+        post.uf
+    )
+
+@app.put('/editar-local-atendimento')
+def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
+    edit_iten = update_controller.Update()
+    edit_iten.EditarConsulta(
+        id, 
+        edit.nome_local, 
+        edit.endereco, 
+        edit.complemento, 
+        edit.bairro, 
+        edit.cep, 
+        edit.cidade, 
+        edit.uf
+    )
+
+@app.delete('/deletar-local-atendimento/{id}')
+def DeletarEspecialidadeMedica(id: int):
+    iten = delete_controller.Delete()
+    iten.DeletarLocalAtendimento(id)
+
+
+
+#----------------------------------------#
+#                                        #
+#  Medicos                               #
+#                                        #
+#----------------------------------------#
+
+class Medicos(BaseModel):
+  crm: int
+  nome: str
+  sobrenome: str
+  endereco: str
+  complemento: str
+  bairro: str
+  cep: str
+  cidade: str
+  uf: str
+  id_especialidade_medica: int
+
+@app.get('/listar-medicos')
+def ListarMedicos():
+    list = get_controller.Get()
+    return list.ListarTodosMedicos()
+
+@app.post('/inserir-medico')
+def InserirMedico(post: Medicos):
+    iten = post_controller.Insert()
+    iten.InserirMedico(
+        post.crm,
+        post.nome, 
+        post.sobrenome, 
+        post.endereco, 
+        post.complemento, 
+        post.bairro, 
+        post.cep,
+        post.cidade,
+        post.uf,
+        post.id_especialidade_medica
+    )
+
+@app.put('/editar-medico')
+def EditarMedico(id: int, edit: Medicos):
+    edit_iten = update_controller.Update()
+    edit_iten.EditarMedico(
+        id, 
+        edit.crm,
+        edit.nome, 
+        edit.sobrenome, 
+        edit.endereco, 
+        edit.complemento, 
+        edit.bairro, 
+        edit.cep,
+        edit.cidade,
+        edit.uf,
+        edit.id_especialidade_medica
+    )
+
+@app.delete('/deletar-medico/{id}')
+def DeletarMedico(id: int):
+    iten = delete_controller.Delete()
+    iten.DeletarMedico(id)
+
+
+#----------------------------------------#
+#                                        #
+#  Pacientes                             #
+#                                        #
+#----------------------------------------#
+
+class Pacientes(BaseModel):
+    matricula_sus: int
+    data_registro: str
+    tipo_sangue: str
+    nome: str
+    sobrenome: str
+    data_nasc: str
+    endereco: str
+    complemento: str
+    bairro: str
+    cep: str
+    cidade: str
+    uf: str
+
+@app.get('/listar-pacientes')
+def ListarPacientes():
+    list = get_controller.Get()
+    return list.ListarTodosPacientes()
+
+@app.post('/inserir-paciente')
+def InserirPaciente(post: Pacientes):
+    iten = post_controller.Insert()
+    iten.InserirPaciente(
+        post.matricula_sus,
+        post.data_registro,
+        post.tipo_sangue,
+        post.nome,
+        post.sobrenome,
+        post.data_nasc,
+        post.endereco,
+        post.complemento,
+        post.bairro,
+        post.cep,
+        post.cidade,
+        post.uf
+    )
+
+@app.put('/editar-paciente')
+def EditarPaciente(id: int, edit: Pacientes):
+    edit_iten = update_controller.Update()
+    edit_iten.EditarPaciente(
+        id, 
+        edit.matricula_sus,
+        edit.data_registro,
+        edit.tipo_sangue,
+        edit.nome,
+        edit.sobrenome,
+        edit.data_nasc,
+        edit.endereco,
+        edit.complemento,
+        edit.bairro,
+        edit.cep,
+        edit.cidade,
+        edit.uf
+    )
+
+@app.delete('/deletar-paciente/{id}')
+def DeletarPaciente(id: int):
+    iten = delete_controller.Delete()
+    iten.DeletarPaciente(id)
+
 

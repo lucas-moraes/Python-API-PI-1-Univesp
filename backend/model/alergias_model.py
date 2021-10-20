@@ -23,6 +23,15 @@ class Alergias:
         connection.close()
 
     @staticmethod
+    def EditarAlergia(id_alergias, descricao):
+        query_string = "UPDATE alergias SET descricao = '" + str(descricao) + "' WHERE id_alergias = " + str(id_alergias) 
+        connection = database.connect()
+        cursor = connection.cursor()
+        cursor.execute(query_string)
+        connection.commit()
+        connection.close()
+
+    @staticmethod
     def DeletarAlergia(id_alergia):
         query_string = "DELETE FROM alergias WHERE id_alergias = " + str(id_alergia) 
         connection = database.connect()
@@ -31,11 +40,3 @@ class Alergias:
         connection.commit()
         connection.close()
 
-    @staticmethod
-    def EditarAlergia(id_alergias, descricao):
-        query_string = "UPDATE alergias SET descricao = '" + str(descricao) + "' WHERE id_alergias = " + str(id_alergias) 
-        connection = database.connect()
-        cursor = connection.cursor()
-        cursor.execute(query_string)
-        connection.commit()
-        connection.close()

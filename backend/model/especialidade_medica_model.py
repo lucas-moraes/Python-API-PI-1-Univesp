@@ -23,6 +23,15 @@ class EspecialidadeMedica:
         connection.close()
 
     @staticmethod
+    def EditarEspecialidade(id_especialidade_medica, desc_especialidade):
+        query_string = "UPDATE especialidade_medica SET desc_especialidade = '" + str(desc_especialidade) + "' WHERE id_especialidade_medica = " + str(id_especialidade_medica) 
+        connection = database.connect()
+        cursor = connection.cursor()
+        cursor.execute(query_string)
+        connection.commit()
+        connection.close()
+
+    @staticmethod
     def DeletarEspecialidade(id_especialidade_medica):
         query_string = "DELETE FROM especialidade_medica WHERE id_especialidade_medica = " + str(id_especialidade_medica) 
         connection = database.connect()
