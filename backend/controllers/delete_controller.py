@@ -11,29 +11,35 @@ class Delete:
     @staticmethod
     def DeletarAlergia(id_alergia):
         do = alergias_model.Alergias()
-        do.DeletarAlergia(id_alergia)
+        response = do.DeletarAlergia(id_alergia)
+        return response
 
     @staticmethod
     def DeletarConsulta(id_consultas):
         do = consultas_model.Consultas()
-        do.DeletarConsulta(id_consultas)
+        response = do.DeletarConsulta(id_consultas)
+        return response
 
     @staticmethod
     def DeletarEspecialidadeMedica(id_especialidade_medica):
         do = especialidade_medica_model.EspecialidadeMedica()
-        do.DeletarEspecialidade(id_especialidade_medica)
+        response = do.DeletarEspecialidade(id_especialidade_medica)
+        return response
 
     @staticmethod
     def DeletarLocalAtendimento(id_local_atendimento):
         do = local_atendimento_model.LocalAtendimento()
-        do.DeletarLocalAtendimento(id_local_atendimento)
+        response = do.DeletarLocalAtendimento(id_local_atendimento)
+        return response
 
     @staticmethod
     def DeletarMedico(id_medico):
         do = medicos_model.Medicos()
-        do.DeletarMedico(id_medico)
+        response = do.DeletarMedico(id_medico)
+        return response
 
     @staticmethod
     def DeletarPaciente(id_paciente):
         do = pacientes_model.Pacientes()
-        do.DeletarPaciente(id_paciente)
+        response = do.DeletarPaciente(id_paciente)
+        return response

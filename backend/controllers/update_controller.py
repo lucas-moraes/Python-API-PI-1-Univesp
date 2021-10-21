@@ -13,10 +13,11 @@ class Update:
         descricao
     ):
         do = alergias_model.Alergias()
-        do.EditarAlergia(
+        response = do.EditarAlergia(
             id_alergias, 
             descricao
         )
+        return response
 
     @staticmethod
     def EditarConsulta(
@@ -29,7 +30,7 @@ class Update:
         compareceu
     ):
         do = consultas_model.Consultas()
-        do.EditarConsulta(
+        response = do.EditarConsulta(
             id_consultas, 
             matricula_sus, 
             id_especialidade_medica, 
@@ -38,6 +39,7 @@ class Update:
             id_local_atendimento, 
             compareceu
         )
+        return response
 
     @staticmethod
     def EditarEspecialidadeMedica(
@@ -45,10 +47,11 @@ class Update:
         desc_especialidade
     ):
         do = especialidade_medica_model.Alergias()
-        do.EditarEspecialidadeMedica(
+        response = do.EditarEspecialidadeMedica(
             id_especialidade_medica, 
             desc_especialidade
         )
+        return response
 
     @staticmethod
     def EditarLocalAtendimento(
@@ -62,7 +65,7 @@ class Update:
         uf
     ):
         do = local_atendimento_model.Consultas()
-        do.EditarLocalAtendimento(
+        response = do.EditarLocalAtendimento(
             id_local_atendimento, 
             nome_local, 
             endereco, 
@@ -72,6 +75,7 @@ class Update:
             cidade, 
             uf
         )
+        return response
 
     @staticmethod
     def EditarMedico(
@@ -88,7 +92,7 @@ class Update:
         id_especialidade_medica
     ):
         do = medicos_model.Medicos()
-        do.EditarMedico(
+        response = do.EditarMedico(
             id, 
             crm, 
             nome, 
@@ -101,6 +105,7 @@ class Update:
             uf, 
             id_especialidade_medica
         )
+        return response
 
     @staticmethod
     def EditarPaciente(
@@ -119,7 +124,7 @@ class Update:
         uf
     ):
         do = pacientes_model.Pacientes()
-        do.EditarPaciente(
+        response = do.EditarPaciente(
             id,
             matricula_sus,
             data_registro,
@@ -134,3 +139,4 @@ class Update:
             cidade,
             uf
         )
+        return response

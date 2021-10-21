@@ -13,10 +13,11 @@ class Insert:
         descricao
     ):
         do = alergias_model.Alergias()
-        do.InserirAlergia(
+        response = do.InserirAlergia(
             matricula_sus, 
             descricao
         )
+        return response
 
     @staticmethod
     def InserirConsulta(
@@ -26,7 +27,7 @@ class Insert:
         id_local_atendimento, compareceu
     ):
         do = consultas_model.Consultas()
-        do.InserirConsulta(
+        response = do.InserirConsulta(
             matricula_sus, 
             id_especialidade_medica, 
             data_hora_marca, 
@@ -34,15 +35,17 @@ class Insert:
             id_local_atendimento, 
             compareceu
         )
+        return response
 
     @staticmethod
     def InserirEspecialidadeMedica(
         desc_especialidade
     ):
         do = especialidade_medica_model.EspecialidadeMedica()
-        do.InserirEspecialidade(
+        response = do.InserirEspecialidade(
             desc_especialidade
         )
+        return response  
 
     @staticmethod
     def InserirLocalAtendiemnto(
@@ -55,7 +58,7 @@ class Insert:
         uf
     ):
         do = local_atendimento_model.LocalAtendimento()
-        do.InserirLocalAtendimento(
+        response = do.InserirLocalAtendimento(
             nome_local, 
             endereco, 
             complemento, 
@@ -64,6 +67,7 @@ class Insert:
             cidade, 
             uf
         )
+        return response
 
     @staticmethod
     def InserirMedico(
@@ -79,7 +83,7 @@ class Insert:
         id_especialidade_medica
     ):
         do = medicos_model.Medicos()
-        do.InserirMedico(
+        response = do.InserirMedico(
             crm, 
             nome, 
             sobrenome, 
@@ -91,6 +95,7 @@ class Insert:
             uf, 
             id_especialidade_medica
         )
+        return response
 
     @staticmethod
     def InserirPaciente(
@@ -108,7 +113,7 @@ class Insert:
         uf
     ):
         do = pacientes_model.Pacientes()
-        do.InserirPaciente(
+        response = do.InserirPaciente(
             matricula_sus,
             data_registro,
             tipo_sangue,
@@ -122,3 +127,4 @@ class Insert:
             cidade,
             uf
         )
+        return response
