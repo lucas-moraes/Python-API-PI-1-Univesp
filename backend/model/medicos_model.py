@@ -9,8 +9,8 @@ class Medicos:
             connection = database.connect()
             cursor = connection.cursor(as_dict = True)
             cursor.execute(query_string)
-            for lista in cursor:
-                return lista
+            listagem = cursor.fetchall()
+            return listagem
         except:
             return False
         connection.close()
