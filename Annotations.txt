@@ -1,7 +1,12 @@
 instalação de packages:
-    fastapi
-    uvicorn
-    pymssql
+    backend:
+        fastapi
+        uvicorn
+        pymssql
+
+    frontend:
+        flask
+        waitress
 
 
 # DataBase ----------------------------------------------------------#
@@ -14,21 +19,31 @@ instalação de packages:
 
 # Backend -----------------------------------------------------------#
     Para rodar o uvicorn no usando cmd do windows:
+        Entrar na pasta que está o projeto
         cd backend        
-        python -m uvicorn app:app
+        python -m uvicorn view:app
 
     Para arquivos python no ubuntu:
         python3.8 ...
 
     https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
 
+    Processo de Cadastro:
+        local_atendimento -> especialidade_medica -> medicos
+        paciente -> alergia -> consultas
+
 
 # Frontend ----------------------------------------------------------#
     Para rodar o Flask é preciso fazer os passos abaixo:
-        cd Frontend
-        export FLASK_APP=flask_test
+        Na pasta do projeto:
+        python index.py
 
     https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application
+
+    https://imasters.com.br/desenvolvimento/conhecendo-o-jinja2-um-mecanismo-para-templates-no-flask
+
+    https://github.com/Kamilahsantos/Flask--Crud
+    
 
 # Diversos -----------------------------------------------------------#
     Gerador CNS

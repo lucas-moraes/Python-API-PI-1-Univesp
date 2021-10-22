@@ -1,0 +1,228 @@
+{% extends "template.html" %}
+
+{% block pacientes %}
+
+<div class="tile">
+    <div class="tile is-parent is-vertical">
+        <article class="tile is-child box is-white">
+            <p class="title is-4 has-text-info">Pacientes</p>
+            <div class="columns">
+                <div class="column pt-1 has-text-left">
+                    {% for iten in pacientes %}
+                    <button class="button is-outlined mb-2 accordion" style="width: 100%;">
+                        <span class="pr-3 is-size-6 has-text-weight-bold">Matricula SUS: </span>
+                        <span class="is-size-6" id="matricula_sus">{{iten.matricula_sus}}</span>
+                    </button>
+                    <div class="p-3 painel">
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID:</span>
+                            <span class="is-size-6">{{iten.id_paciente}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Data de registro:</span>
+                            <span class="is-size-6">{{iten.data_registro}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Nome:</span>
+                            <span class="is-size-6">{{iten.nome}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Sobrenome:</span>
+                            <span class="is-size-6">{{iten.sobrenome}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Data de Nascimento:</span>
+                            <span class="is-size-6">{{iten.data_nasc}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Tipo sanguínio:</span>
+                            <span class="is-size-6">{{iten.tipo_sangue}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Endereço:</span>
+                            <span class="is-size-6">{{iten.endereco}}</span>
+                        </div>
+                        {% if iten.complemento %}
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Complemento:</span>
+                            <span class="is-size-6">{{iten.complemento}}</span>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Bairro:</span>
+                            <span class="is-size-6">{{iten.bairro}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">CEP:</span>
+                            <span class="is-size-6">{{iten.cep}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Cidade:</span>
+                            <span class="is-size-6">{{iten.cidade}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">UF:</span>
+                            <span class="is-size-6">{{iten.uf}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+        <article class="tile is-child box is-white">
+            <p class="title is-4 has-text-success">Consultas</p>
+            <div class="columns">
+                <div class="column pt-1 has-text-left">
+                    {% for iten in consultas %}
+                    <button class="button is-outlined mb-2 accordion" style="width: 100%;">
+                        <span class="pr-3 is-size-6 has-text-weight-bold">Matricula SUS: </span>
+                        <span class="is-size-6">{{iten.matricula_sus}}</span>
+                    </button>
+                    <div class="p-3 painel">
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID:</span>
+                            <span class="is-size-6">{{iten.id_consultas}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Especialidade:</span>
+                            <span
+                                class="is-size-6">{{especialidades_medicas["desc_especialidade"]}}{{iten.id_especialidade_medica}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">data_hora_marcada:</span>
+                            <span class="is-size-6">{{iten.data_hora_marcada}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID Medico:</span>
+                            <span class="is-size-6">{{iten.id_medico}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID Local do atendimento:</span>
+                            <span class="is-size-6">{{iten.id_local_atendimento}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    </div>
+    <div class="tile is-parent">
+        <article class="tile is-child box notification is-white">
+            <p class="title is-4 has-text-primary">Medicos</p>
+            <div class="columns">
+                <div class="column pt-1 has-text-left">
+                    {% for iten in medicos %}
+                    <button class="button is-outlined mb-2 accordion" style="width: 100%;">
+                        <span class="pr-3 is-size-6 has-text-weight-bold">Medico: </span>
+                        <span class="is-size-6">{{iten.nome}} {{iten.sobrenome}}</span>
+                    </button>
+                    <div class="p-3 painel">
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID:</span>
+                            <span class="is-size-6">{{iten.id_medico}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">CRM: </span>
+                            <span class="is-size-6">{{iten.crm}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Endereço: </span>
+                            <span class="is-size-6">{{iten.endereco}}</span>
+                        </div>
+                        {% if iten.complemento %}
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">complemento: </span>
+                            <span class="is-size-6">{{iten.complemento}}</span>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">CEP: </span>
+                            <span class="is-size-6">{{iten.cep}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Cidade:</span>
+                            <span class="is-size-6">{{iten.cidade}} <b>UF: </b> {{iten.uf}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID Especialidade:</span>
+                            <span class="is-size-6">{{iten.id_especialidade_medica}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    </div>
+    <div class="tile is-parent">
+        <article class="tile is-child box notification is-white">
+            <p class="title is-4 has-text-dark">Especialidades médicas</p>
+            <div class="columns">
+                <div class="column pt-1 has-text-left">
+                    {% for iten in especialidades_medicas %}
+                    <div class="p-3">
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">ID:</span>
+                            <span class="is-size-6">{{iten.id_especialidade_medica}}</span>
+                        </div>
+                        <div>
+                            <span class="is-size-6 has-text-weight-bold">Especialidade:</span>
+                            <span class="is-size-6">{{iten.desc_especialidade}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+<div class="tile is-parent">
+    <article class="tile is-child box notification is-white">
+        <p class="title is-4 has-text-dark">Local atendimento</p>
+        <div class="columns">
+            <div class="column pt-1 has-text-left">
+                {% for iten in local_atendimento %}
+                <button class="button is-outlined mb-2 accordion">
+                    <span class="pr-3 is-size-6 has-text-weight-bold">Local: </span>
+                    <span class="is-size-6">{{iten.nome_local}}</span>
+                </button>
+                <div class="p-3 painel">
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">ID:</span>
+                        <span class="is-size-6">{{iten.id_local_atendimento}}</span>
+                    </div>
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">Endereço:</span>
+                        <span class="is-size-6">{{iten.endereco}}</span>
+                    </div>
+                    {% if iten.complemento %}
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">Complemento: </span>
+                        <span class="is-size-6">{{iten.complemento}}</span>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">Bairro:</span>
+                        <span class="is-size-6">{{iten.bairro}}</span>
+                    </div>
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">CEP:</span>
+                        <span class="is-size-6">{{iten.cep}}</span>
+                    </div>
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">Cidade:</span>
+                        <span class="is-size-6">{{iten.cidade}}</span>
+                    </div>
+                    <div>
+                        <span class="is-size-6 has-text-weight-bold">UF:</span>
+                        <span class="is-size-6">{{iten.uf}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+</div>
+
+
+
+{% endblock %}

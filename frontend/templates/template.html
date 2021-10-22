@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-background-light" lang="pt-br">
 
     <head>
         <meta charset="utf-8">
@@ -21,6 +21,20 @@
                 </div>
             </nav>
         </navbar>
+
+        <div class="container m-4" id="animation">
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical is-12">
+
+                    {% block pacientes %}{% endblock %}
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="{{url_for('static', filename='effects.js')}}"></script>
     </body>
 
 </html>
