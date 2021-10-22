@@ -63,7 +63,7 @@ CREATE TABLE local_atendimento
   bairro varchar(255),
   cep varchar(8),
   cidade varchar(255),
-  UF varchar(2)
+  uf varchar(2)
 );
 
 ALTER TABLE alergias ADD FOREIGN KEY (matricula_sus) REFERENCES pacientes (matricula_sus);

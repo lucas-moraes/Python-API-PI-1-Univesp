@@ -257,7 +257,7 @@ def InserirLocalAtendimento(post: LocalAtendimento):
 def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
     try:
         do = update_controller.Update()
-        response = do.EditarConsulta(
+        response = do.EditarLocalAtendimento(
             id, 
             edit.nome_local, 
             edit.endereco, 
@@ -267,6 +267,7 @@ def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
             edit.cidade, 
             edit.uf
         )
+        print('ok')
         if response is False:
            return {"response":"Erro interno"}
         return {"response": "Executado com sucesso!"}

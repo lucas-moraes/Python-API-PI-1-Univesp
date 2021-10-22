@@ -64,7 +64,7 @@ class Update:
         cidade, 
         uf
     ):
-        do = local_atendimento_model.Consultas()
+        do = local_atendimento_model.LocalAtendimento()
         response = do.EditarLocalAtendimento(
             id_local_atendimento, 
             nome_local, 
