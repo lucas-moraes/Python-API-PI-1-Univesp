@@ -5,6 +5,16 @@ from model import local_atendimento_model
 from model import medicos_model
 from model import pacientes_model
 
+class Search:
+
+    @staticmethod
+    def ListarAlergiasPorMatricula(matricula_sus):
+        do = alergias_model.Alergias()
+        response = do.ListarAlergiasPorMatricula(
+            matricula_sus
+        )
+        return response
+
 class Insert:
 
     @staticmethod

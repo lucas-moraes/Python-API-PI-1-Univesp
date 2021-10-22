@@ -13,7 +13,19 @@ class Alergias:
             return listagem
         except:
             return False
-        connection.close()
+
+    @staticmethod
+    def ListarAlergiasPorMatricula(matricula_sus):
+        print(matricula_sus)
+        try:
+            query_string = "SELECT * FROM alergias where matricula_sus=" + str(matricula_sus)
+            connection = database.connect()
+            cursor = connection.cursor(as_dict = True)
+            cursor.execute(query_string)
+            listagem = cursor.fetchall()
+            return listagem
+        except:
+            return False
 
     @staticmethod
     def InserirAlergia(matricula_sus, descricao):

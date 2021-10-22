@@ -35,6 +35,19 @@ def ListarAlergias():
     except:
         return {"response": "Erro na execução"}
 
+@app.post('/listar-alergias-matricula/')
+def ListarAlergias(matricula_sus: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarAlergiasPorMatricula(matricula_sus)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response":"Lista vazia"}        
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 @app.post('/inserir-alergia')
 def InserirAlergia(inserir: Alergias):
     try:
