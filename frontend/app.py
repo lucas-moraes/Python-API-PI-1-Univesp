@@ -1,10 +1,16 @@
+from typing import List
 from flask import Flask, render_template
 import requests
 
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def Index():
+    return render_template('home.html')
+
+@app.route('/listas')
+def Listas():
+
     lista_pacientes = requests.get(url='http://127.0.0.1:8000/listar-pacientes')
     listagem_pacientes_json = lista_pacientes.json()
     pacientes = []    
