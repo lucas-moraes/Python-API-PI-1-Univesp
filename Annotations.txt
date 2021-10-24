@@ -22,6 +22,8 @@ instalação de packages:
     Criar o banco de dados:
         Entrar na pasta db:
             python create_db
+        
+        Depois, ir na pasta connection, e no arquivo database.py colocar o caminho que está o arquivo do banco de dados.
 
     Para rodar o uvicorn no usando cmd do windows:
         Entrar na pasta que está o projeto
