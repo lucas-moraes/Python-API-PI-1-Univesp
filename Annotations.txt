@@ -14,14 +14,15 @@ instalação de packages:
 
 
 # DataBase ----------------------------------------------------------#
-    SQL Server no docker
-        https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash#connect-from-outside-the-container
-
     Prototipagem
         https://dbdiagram.io/d/616b28ff940c4c4eec98b056
 
 
 # Backend -----------------------------------------------------------#
+    Criar o banco de dados:
+        Entrar na pasta db:
+            python create_db
+
     Para rodar o uvicorn no usando cmd do windows:
         Entrar na pasta que está o projeto
         cd backend        
@@ -29,8 +30,6 @@ instalação de packages:
 
     Para arquivos python no ubuntu:
         python3.8 ...
-
-    https://dev.to/xarala221/python-rest-apis-with-fastapi-crud-application-9kc
 
     Processo de Cadastro:
         local_atendimento -> especialidade_medica -> medicos

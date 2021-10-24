@@ -1,14 +1,17 @@
+import sqlite3
 import connection.database as database
+
 
 class EspecialidadeMedica:
 
     @staticmethod
     def ListarTodos():
         try:
-            query_string = "SELECT * FROM especialidade_medica"
+            query_string = "SELECT rowid, * FROM especialidade_medica"
             connection = database.connect()
-            cursor = connection.cursor(as_dict = True)
-            cursor.execute(query_string)
+            connection.row_factory = sqlite3.Row
+            cursor = connection.cursor()
+            listagem = cursor.execute(query_string)
             listagem = cursor.fetchall()
             return listagem
         except:
@@ -20,7 +23,8 @@ class EspecialidadeMedica:
         desc_especialidade
     ):
         try:
-            query_string = "INSERT INTO especialidade_medica (desc_especialidade) VALUES ('" + str(desc_especialidade) + "')"
+            query_string = "INSERT INTO especialidade_medica (desc_especialidade) VALUES ('" + str(
+                desc_especialidade) + "')"
             connection = database.connect()
             cursor = connection.cursor()
             cursor.execute(query_string)
@@ -32,11 +36,13 @@ class EspecialidadeMedica:
 
     @staticmethod
     def EditarEspecialidade(
-        id_especialidade_medica, 
+        id_especialidade_medica,
         desc_especialidade
     ):
         try:
-            query_string = "UPDATE especialidade_medica SET desc_especialidade = '" + str(desc_especialidade) + "' WHERE id_especialidade_medica = " + str(id_especialidade_medica) 
+            query_string = "UPDATE especialidade_medica SET desc_especialidade = '" + \
+                str(desc_especialidade) + "' WHERE rowid = " + \
+                str(id_especialidade_medica)
             connection = database.connect()
             cursor = connection.cursor()
             cursor.execute(query_string)
@@ -51,7 +57,8 @@ class EspecialidadeMedica:
         id_especialidade_medica
     ):
         try:
-            query_string = "DELETE FROM especialidade_medica WHERE id_especialidade_medica = " + str(id_especialidade_medica) 
+            query_string = "DELETE FROM especialidade_medica WHERE rowid = " + \
+                str(id_especialidade_medica)
             connection = database.connect()
             cursor = connection.cursor()
             cursor.execute(query_string)
@@ -60,4 +67,3 @@ class EspecialidadeMedica:
             return True
         except:
             return False
-
