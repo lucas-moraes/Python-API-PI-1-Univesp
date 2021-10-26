@@ -1,11 +1,11 @@
 {% extends "template.html" %}
 
-{% block pacientes %}
+{% block listas %}
 
 <div class="tile">
     <div class="tile is-parent is-vertical">
         <article class="tile is-child box is-white">
-            <p class="title is-4 has-text-info">Pacientes</p>
+            <p class="title is-4 has-text-info is-size-5">Pacientes</p>
             <div class="columns">
                 <div class="column pt-1 has-text-left">
                     {% for iten in pacientes %}
@@ -70,7 +70,7 @@
             </div>
         </article>
         <article class="tile is-child box is-white">
-            <p class="title is-4 has-text-success">Consultas</p>
+            <p class="title is-4 has-text-success is-size-5">Consultas</p>
             <div class="columns">
                 <div class="column pt-1 has-text-left">
                     {% for iten in consultas %}
@@ -108,7 +108,7 @@
     </div>
     <div class="tile is-parent">
         <article class="tile is-child box notification is-white">
-            <p class="title is-4 has-text-primary">Medicos</p>
+            <p class="title is-4 has-text-primary is-size-5">Medicos</p>
             <div class="columns">
                 <div class="column pt-1 has-text-left">
                     {% for iten in medicos %}
@@ -119,7 +119,7 @@
                     <div class="p-3 painel">
                         <div>
                             <span class="is-size-6 has-text-weight-bold">ID:</span>
-                            <span class="is-size-6">{{iten.id_medico}}</span>
+                            <span class="is-size-6">{{iten.rowid}}</span>
                         </div>
                         <div>
                             <span class="is-size-6 has-text-weight-bold">CRM: </span>
@@ -155,14 +155,14 @@
     </div>
     <div class="tile is-parent">
         <article class="tile is-child box notification is-white">
-            <p class="title is-4 has-text-dark">Especialidades médicas</p>
+            <p class="title is-4 has-text-dark is-size-5">Especialidades médicas</p>
             <div class="columns">
                 <div class="column pt-1 has-text-left">
                     {% for iten in especialidades_medicas %}
                     <div class="p-3">
                         <div>
                             <span class="is-size-6 has-text-weight-bold">ID:</span>
-                            <span class="is-size-6">{{iten.id_especialidade_medica}}</span>
+                            <span class="is-size-6">{{iten.rowid}}</span>
                         </div>
                         <div>
                             <span class="is-size-6 has-text-weight-bold">Especialidade:</span>
@@ -177,7 +177,7 @@
 </div>
 <div class="tile is-parent">
     <article class="tile is-child box notification is-white">
-        <p class="title is-4 has-text-dark">Local atendimento</p>
+        <p class="title is-4 has-text-dark is-size-5">Local atendimento</p>
         <div class="columns">
             <div class="column pt-1 has-text-left">
                 {% for iten in local_atendimento %}

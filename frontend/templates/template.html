@@ -18,6 +18,23 @@
                             SBP-SUS
                         </h4>
                     </div>
+
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                        data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item" href="http://127.0.0.1:5000/">
+                            Home
+                        </a>
+                        <a class="navbar-item" href="http://127.0.0.1:5000/listas">
+                            Listas
+                        </a>
+                    </div>
                 </div>
             </nav>
         </navbar>
@@ -26,8 +43,7 @@
             <div class="tile is-ancestor">
                 <div class="tile is-vertical is-12">
                     {% block home %} {% endblock %}
-                    {% block pacientes %}{% endblock %}
-
+                    {% block listas %}{% endblock %}
                 </div>
             </div>
         </div>
