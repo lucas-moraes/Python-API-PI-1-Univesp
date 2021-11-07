@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+
 @app.get('/')
 def root():
     return {"home": "It's running !"}
@@ -22,6 +23,7 @@ class Alergias(BaseModel):
     matricula_sus: int
     descricao: str
 
+
 @app.get('/listar-alergias')
 def ListarAlergias():
     try:
@@ -30,10 +32,11 @@ def ListarAlergias():
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"response":"Lista vazia"}        
+            return {"response": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
 
 @app.post('/listar-alergias-matricula/')
 def ListarAlergias(matricula_sus: int):
@@ -43,17 +46,32 @@ def ListarAlergias(matricula_sus: int):
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"response":"Lista vazia"}        
+            return {"response": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-alergias-id/')
+def ListarAlergiasPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarAlergiasPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-alergia')
 def InserirAlergia(inserir: Alergias):
     try:
         do = post_controller.Insert()
         response = do.InserirAlergia(
-            inserir.matricula_sus, 
+            inserir.matricula_sus,
             inserir.descricao
         )
         if response is False:
@@ -62,16 +80,18 @@ def InserirAlergia(inserir: Alergias):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-alergia')
 def EditarAlergia(id: int, desc: str):
     try:
         do = update_controller.Update()
         response = do.EditarAlergia(id, desc)
         if response is False:
-           return {"response":"Edição não realizada"}
+            return {"response": "Edição não realizada"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-alergia/{id}')
 def DeletarAlergia(id: int):
@@ -79,7 +99,7 @@ def DeletarAlergia(id: int):
         do = delete_controller.Delete()
         response = do.DeletarAlergia(id)
         if response is False:
-           return {"response":"Exclusão não realizada"}
+            return {"response": "Exclusão não realizada"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
@@ -92,36 +112,66 @@ def DeletarAlergia(id: int):
 #----------------------------------------#
 
 class Consultas(BaseModel):
-  matricula_sus: int
-  id_especialidade_medica: int
-  data_hora_marcada: str #YYYY-MM-DD hh:mm:ss
-  id_medico: int
-  id_local_atendimento: int
-  compareceu: bool
+    matricula_sus: int
+    id_especialidade_medica: int
+    data_hora_marcada: str  # YYYY-MM-DD hh:mm:ss
+    id_medico: int
+    id_local_atendimento: int
+    compareceu: bool
+
 
 @app.get('/listar-consultas')
 def ListarConsultas():
     try:
         do = get_controller.Get()
-        lista = do.ListarTodasConsultas()    
+        lista = do.ListarTodasConsultas()
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"atenção":"Lista vazia"}        
+            return {"atenção": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-consultas-matricula/')
+def ListarConsultasPorMatricula(matricula_sus: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarConsultasPorMatricula(matricula_sus)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
+
+@app.post('/listar-consultas-id/')
+def ListarConsultasPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarConsultasPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-consulta')
 def InserirConsulta(inserir: Consultas):
     try:
         iten = post_controller.Insert()
         response = iten.InserirConsulta(
-            inserir.matricula_sus, 
-            inserir.id_especialidade_medica, 
-            inserir.data_hora_marcada, 
-            inserir.id_medico, 
-            inserir.id_local_atendimento, 
+            inserir.matricula_sus,
+            inserir.id_especialidade_medica,
+            inserir.data_hora_marcada,
+            inserir.id_medico,
+            inserir.id_local_atendimento,
             inserir.compareceu
         )
         if response is False:
@@ -130,24 +180,26 @@ def InserirConsulta(inserir: Consultas):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-consulta')
 def EditarConsulta(id: int, edit: Consultas):
     try:
         do = update_controller.Update()
         response = do.EditarConsulta(
-            id, 
-            edit.matricula_sus, 
-            edit.id_especialidade_medica, 
-            edit.data_hora_marcada, 
-            edit.id_medico, 
-            edit.id_local_atendimento, 
+            id,
+            edit.matricula_sus,
+            edit.id_especialidade_medica,
+            edit.data_hora_marcada,
+            edit.id_medico,
+            edit.id_local_atendimento,
             edit.compareceu
         )
         if response is False:
-           return {"response":"Edição não realizada"}
+            return {"response": "Edição não realizada"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-consulta/{id}')
 def DeletarConsulta(id: int):
@@ -155,11 +207,11 @@ def DeletarConsulta(id: int):
         do = delete_controller.Delete()
         response = do.DeletarConsulta(id)
         if response is False:
-           return {"response":"Edição não realizada"}
+            return {"response": "Edição não realizada"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
-        
+
 
 #----------------------------------------#
 #                                        #
@@ -170,6 +222,7 @@ def DeletarConsulta(id: int):
 class EspecialidadeMedica(BaseModel):
     desc_especialidade: str
 
+
 @app.get('/listar-especialidades-medicas')
 def ListarEspecialidadesMedicas():
     try:
@@ -178,10 +231,25 @@ def ListarEspecialidadesMedicas():
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"atenção":"Lista vazia"}        
+            return {"atenção": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-especialidade-medica-id/')
+def ListarEspecialidadeMedicaPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarEspecialidadeMedicaPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-especialidade-medica')
 def InserirEspecialidadMedica(post: EspecialidadeMedica):
@@ -196,16 +264,18 @@ def InserirEspecialidadMedica(post: EspecialidadeMedica):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-especialidade-medica')
 def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica):
     try:
         do = update_controller.Update()
         response = do.EditarEspecialidadeMedica(id, edit.desc_especialidade)
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-especialidade-medica/{id}')
 def DeletarEspecialidadeMedica(id: int):
@@ -213,7 +283,7 @@ def DeletarEspecialidadeMedica(id: int):
         do = delete_controller.Delete()
         response = do.DeletarEspecialidadeMedica(id)
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
@@ -234,6 +304,7 @@ class LocalAtendimento(BaseModel):
     cidade: str
     uf: str
 
+
 @app.get('/listar-local-atendimento')
 def ListarLocalAtendimento():
     try:
@@ -242,22 +313,37 @@ def ListarLocalAtendimento():
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"atenção":"Lista vazia"}        
+            return {"atenção": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-local-atendimento-id/')
+def ListarLocalAtendimentoPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarLocalAtendimentoPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-local-atendimento')
 def InserirLocalAtendimento(post: LocalAtendimento):
     try:
         do = post_controller.Insert()
         response = do.InserirLocalAtendiemnto(
-            post.nome_local, 
-            post.endereco, 
-            post.complemento, 
-            post.bairro, 
-            post.cep, 
-            post.cidade, 
+            post.nome_local,
+            post.endereco,
+            post.complemento,
+            post.bairro,
+            post.cep,
+            post.cidade,
             post.uf
         )
         if response is False:
@@ -266,26 +352,28 @@ def InserirLocalAtendimento(post: LocalAtendimento):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-local-atendimento')
 def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
     try:
         do = update_controller.Update()
         response = do.EditarLocalAtendimento(
-            id, 
-            edit.nome_local, 
-            edit.endereco, 
-            edit.complemento, 
-            edit.bairro, 
-            edit.cep, 
-            edit.cidade, 
+            id,
+            edit.nome_local,
+            edit.endereco,
+            edit.complemento,
+            edit.bairro,
+            edit.cep,
+            edit.cidade,
             edit.uf
         )
         print('ok')
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-local-atendimento/{id}')
 def DeletarEspecialidadeMedica(id: int):
@@ -293,7 +381,7 @@ def DeletarEspecialidadeMedica(id: int):
         do = delete_controller.Delete()
         response = do.DeletarLocalAtendimento(id)
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
@@ -304,17 +392,19 @@ def DeletarEspecialidadeMedica(id: int):
 #                                        #
 #----------------------------------------#
 
+
 class Medicos(BaseModel):
-  crm: int
-  nome: str
-  sobrenome: str
-  endereco: str
-  complemento: str
-  bairro: str
-  cep: str
-  cidade: str
-  uf: str
-  id_especialidade_medica: int
+    crm: int
+    nome: str
+    sobrenome: str
+    endereco: str
+    complemento: str
+    bairro: str
+    cep: str
+    cidade: str
+    uf: str
+    id_especialidade_medica: int
+
 
 @app.get('/listar-medicos')
 def ListarMedicos():
@@ -324,10 +414,25 @@ def ListarMedicos():
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"atenção":"Lista vazia"}        
+            return {"atenção": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-medicos-id/')
+def ListarMedicosPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarMedicosPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-medico')
 def InserirMedico(post: Medicos):
@@ -335,11 +440,11 @@ def InserirMedico(post: Medicos):
         do = post_controller.Insert()
         response = do.InserirMedico(
             post.crm,
-            post.nome, 
-            post.sobrenome, 
-            post.endereco, 
-            post.complemento, 
-            post.bairro, 
+            post.nome,
+            post.sobrenome,
+            post.endereco,
+            post.complemento,
+            post.bairro,
             post.cep,
             post.cidade,
             post.uf,
@@ -351,28 +456,30 @@ def InserirMedico(post: Medicos):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-medico')
 def EditarMedico(id: int, edit: Medicos):
     try:
         do = update_controller.Update()
         response = do.EditarMedico(
-            id, 
+            id,
             edit.crm,
-            edit.nome, 
-            edit.sobrenome, 
-            edit.endereco, 
-            edit.complemento, 
-            edit.bairro, 
+            edit.nome,
+            edit.sobrenome,
+            edit.endereco,
+            edit.complemento,
+            edit.bairro,
             edit.cep,
             edit.cidade,
             edit.uf,
             edit.id_especialidade_medica
         )
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-medico/{id}')
 def DeletarMedico(id: int):
@@ -380,7 +487,7 @@ def DeletarMedico(id: int):
         do = delete_controller.Delete()
         response = do.DeletarMedico(id)
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
@@ -390,6 +497,7 @@ def DeletarMedico(id: int):
 #  Pacientes                             #
 #                                        #
 #----------------------------------------#
+
 
 class Pacientes(BaseModel):
     matricula_sus: int
@@ -405,6 +513,7 @@ class Pacientes(BaseModel):
     cidade: str
     uf: str
 
+
 @app.get('/listar-pacientes')
 def ListarPacientes():
     try:
@@ -413,10 +522,39 @@ def ListarPacientes():
         if lista is False:
             return {"response": "Erro na consulta"}
         elif (lista is None):
-            return {"atenção":"Lista vazia"}        
+            return {"atenção": "Lista vazia"}
         return lista
     except:
         return {"response": "Erro na execução"}
+
+
+@app.post('/listar-paciente-matricula/')
+def ListarPacientePorMatricula(matricula_sus: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarPacientesPorMatricula(matricula_sus)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
+
+@app.post('/listar-pacientes-id/')
+def ListarPacientesPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarPacientesPorId(id)
+        if lista is False:
+            return {"response": "Erro na consulta"}
+        elif (lista is None):
+            return {"response": "Lista vazia"}
+        return lista
+    except:
+        return {"response": "Erro na execução"}
+
 
 @app.post('/inserir-paciente')
 def InserirPaciente(post: Pacientes):
@@ -442,12 +580,13 @@ def InserirPaciente(post: Pacientes):
     except:
         return {"response": "Erro na execução"}
 
+
 @app.put('/editar-paciente')
 def EditarPaciente(id: int, edit: Pacientes):
     try:
         do = update_controller.Update()
         response = do.EditarPaciente(
-            id, 
+            id,
             edit.matricula_sus,
             edit.data_registro,
             edit.tipo_sangue,
@@ -462,10 +601,11 @@ def EditarPaciente(id: int, edit: Pacientes):
             edit.uf
         )
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
-        return {"response": "Erro na execução"}        
+        return {"response": "Erro na execução"}
+
 
 @app.delete('/deletar-paciente/{id}')
 def DeletarPaciente(id: int):
@@ -473,7 +613,7 @@ def DeletarPaciente(id: int):
         do = delete_controller.Delete()
         response = do.DeletarPaciente(id)
         if response is False:
-           return {"response":"Erro interno"}
+            return {"response": "Erro interno"}
         return {"response": "Executado com sucesso!"}
     except:
         return {"response": "Erro na execução"}
