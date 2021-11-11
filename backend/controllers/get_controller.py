@@ -1,12 +1,13 @@
-from model import alergias_model
-from model import consultas_model
-from model import especialidade_medica_model
-from model import local_atendimento_model
-from model import medicos_model
-from model import pacientes_model
+from backend.model import alergias_model
+from backend.model import consultas_model
+from backend.model import especialidade_medica_model
+from backend.model import local_atendimento_model
+from backend.model import medicos_model
+from backend.model import pacientes_model
+
 
 class Get:
-    
+
     @staticmethod
     def ListarTodasAlergias():
         do = alergias_model.Alergias()

@@ -1,5 +1,5 @@
 import sqlite3
-import connection.database as database
+import backend.connection.database as database
 
 
 class Pacientes:
@@ -30,7 +30,7 @@ class Pacientes:
             connection.row_factory = sqlite3.Row
             cursor = connection.cursor()
             listagem = cursor.execute(query_string)
-            listagem = cursor.fetchall()
+            listagem = cursor.fetchone()
             return listagem
         except:
             return False

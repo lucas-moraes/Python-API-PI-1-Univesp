@@ -1,5 +1,5 @@
 import sqlite3
-import connection.database as database
+import backend.connection.database as database
 
 
 class LocalAtendimento:

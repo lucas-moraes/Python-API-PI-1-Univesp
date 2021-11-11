@@ -1,11 +1,22 @@
 from fastapi import FastAPI
-from controllers import get_controller
-from controllers import post_controller
-from controllers import delete_controller
-from controllers import update_controller
+from fastapi.middleware.cors import CORSMiddleware
+from backend.controllers import get_controller
+from backend.controllers import post_controller
+from backend.controllers import delete_controller
+from backend.controllers import update_controller
 from pydantic import BaseModel
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/')
@@ -38,7 +49,7 @@ def ListarAlergias():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-alergias-matricula/')
+@app.post('/listar-alergias-matricula/{matricula_sus}')
 def ListarAlergias(matricula_sus: int):
     try:
         do = post_controller.Search()
@@ -52,7 +63,7 @@ def ListarAlergias(matricula_sus: int):
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-alergias-id/')
+@app.post('/listar-alergias-id/{id}')
 def ListarAlergiasPodId(id: int):
     try:
         do = post_controller.Search()
@@ -134,7 +145,7 @@ def ListarConsultas():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-consultas-matricula/')
+@app.post('/listar-consultas-matricula/{matricula_sus}')
 def ListarConsultasPorMatricula(matricula_sus: int):
     try:
         do = post_controller.Search()
@@ -148,7 +159,7 @@ def ListarConsultasPorMatricula(matricula_sus: int):
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-consultas-id/')
+@app.post('/listar-consultas-id/{id}')
 def ListarConsultasPodId(id: int):
     try:
         do = post_controller.Search()
@@ -237,7 +248,7 @@ def ListarEspecialidadesMedicas():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-especialidade-medica-id/')
+@app.post('/listar-especialidade-medica-id/{id}')
 def ListarEspecialidadeMedicaPodId(id: int):
     try:
         do = post_controller.Search()
@@ -319,7 +330,7 @@ def ListarLocalAtendimento():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-local-atendimento-id/')
+@app.post('/listar-local-atendimento-id/{id}')
 def ListarLocalAtendimentoPodId(id: int):
     try:
         do = post_controller.Search()
@@ -420,7 +431,7 @@ def ListarMedicos():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-medicos-id/')
+@app.post('/listar-medicos-id/{id}')
 def ListarMedicosPodId(id: int):
     try:
         do = post_controller.Search()
@@ -528,7 +539,7 @@ def ListarPacientes():
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-paciente-matricula/')
+@app.post('/listar-paciente-matricula/{matricula_sus}')
 def ListarPacientePorMatricula(matricula_sus: int):
     try:
         do = post_controller.Search()
@@ -542,7 +553,7 @@ def ListarPacientePorMatricula(matricula_sus: int):
         return {"response": "Erro na execução"}
 
 
-@app.post('/listar-pacientes-id/')
+@app.post('/listar-pacientes-id/{id}')
 def ListarPacientesPodId(id: int):
     try:
         do = post_controller.Search()
