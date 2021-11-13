@@ -61,3 +61,120 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 } );
 
+async function Consultar ( event ) {
+    let id = event.target.value;
+    let paciente = [];
+    let alergias = [];
+
+    if ( id.length > 5 )
+    {
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
+            }
+        };
+
+        await fetch( "https://127.0.0.1:8000/listar-paciente-matricula/" + id, requestOptions )
+            .then( response => response.json() )
+            .then( result => paciente.push( result ) )
+            .catch( error => console.log( 'error', error ) );
+
+        await fetch( "https://127.0.0.1:8000/listar-alergias-matricula/" + id, requestOptions )
+            .then( response => response.json() )
+            .then( result => {
+                for ( iten in result )
+                {
+                    alergias.push( result[ iten ] );
+                }
+            } )
+            .catch( error => console.log( 'error', error ) );
+
+        console.log( paciente );
+
+        let dados = paciente.map( ( iten ) => {
+            return (
+                `<article class="tile is-child box is-white">` +
+                `<p class="title is-4 has-text-info is-size-5">Paciente</p>` +
+                `<div class="columns">` +
+                `<div class="column pt-1 has-text-left">` +
+                `<div class="p-3">` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Matricula SUS: </span>` +
+                `<span class="is-size-6">${ iten.matricula_sus }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Data de registro: </span>` +
+                `<span class="is-size-6">${ iten.data_registro }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Nome: </span>` +
+                `<span class="is-size-6">${ iten.nome }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Sobrenome: </span>` +
+                `<span class="is-size-6">${ iten.sobrenome }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Data de Nascimento: </span>` +
+                `<span class="is-size-6">${ iten.data_nasc }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Tipo sanguínio: </span>` +
+                `<span class="is-size-6">${ iten.tipo_sangue }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Endereço: </span>` +
+                `<span class="is-size-6">${ iten.endereco }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Complemento:</span>` +
+                `<span class="is-size-6">${ iten.complemento }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Bairro: </span>` +
+                `<span class="is-size-6">${ iten.bairro }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">CEP: </span>` +
+                `<span class="is-size-6">${ iten.cep }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">Cidade: </span>` +
+                `<span class="is-size-6">${ iten.cidade }</span>` +
+                `</div>` +
+                `<div>` +
+                `<span class="is-size-6 has-text-weight-bold">UF: </span>` +
+                `<span class="is-size-6">${ iten.uf }</span>` +
+                `</div>` +
+                `</div>` +
+                `</div>` +
+                `</div>` +
+                `<p class="title is-4 has-text-info is-size-5">Alergias</p>` +
+                `<div class="columns">` +
+                `<div class="column pt-1 has-text-left">` +
+                `<div class="p-3">` +
+                `<div id="alergias">` +
+                `</div>` +
+                `</div>` +
+                `</div>` +
+                `</article>`
+            );
+        } );
+
+        let alerg = alergias.map( ( iten ) => {
+            return (
+                `<div>` +
+                `<span class="is-size-6 has-text-danger has-text-weight-bold">${ iten.descricao }</span>` +
+                `</div>`
+            );
+        } );
+
+        document.getElementById( "paciente" ).innerHTML = dados;
+        document.getElementById( "alergias" ).innerHTML = alerg;
+
+    }
+
+
+}

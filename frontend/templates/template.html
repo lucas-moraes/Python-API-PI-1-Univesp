@@ -27,9 +27,25 @@
                     </a>
                 </div>
                 <div id="navbarBasicExample" class="navbar-menu">
+
+                    {% if pagename == "consulta" %}
+                    <div class="navbar-start">
+                        <div class="navbar-item has-background-info">
+                            <div class="field is-horizontal mt-1">
+                                <label class="label has-text-white is-hidden-mobile mt-1 mr-3">Consultar
+                                    Paciente</label>
+                                <div class="control">
+                                    <input class="input is-small" type="text" onkeyup="Consultar(event)"
+                                        placeholder="Matricula SUS" maxlength="6" style="width: 100px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <div class="navbar-end">
-                        <a class="navbar-item" href="{{url_for('Home')}}">
-                            Home
+                        <a class="navbar-item" href="{{url_for('Consulta')}}">
+                            Consultar
                         </a>
                         <a class="navbar-item" href="{{url_for('Listas')}}">
                             Listas
@@ -40,9 +56,12 @@
         </navbar>
 
         <div class="container m-4" id="animation">
+
+            {% block consulta %} {% endblock %}
+
             <div class="tile is-ancestor">
                 <div class="tile is-vertical is-12">
-                    {% block home %} {% endblock %}
+
                     {% block listas %}{% endblock %}
                 </div>
             </div>
