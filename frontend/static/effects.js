@@ -76,12 +76,12 @@ async function Consultar ( event ) {
             }
         };
 
-        await fetch( "https://127.0.0.1:8000/listar-paciente-matricula/" + id, requestOptions )
-            .then( response => response.json() )
+        await fetch( "http://127.0.0.1:8000/listar-paciente-matricula/" + id, requestOptions )
+            .then( response => { console.log( response ); response.json(); } )
             .then( result => paciente.push( result ) )
             .catch( error => console.log( 'error', error ) );
 
-        await fetch( "https://127.0.0.1:8000/listar-alergias-matricula/" + id, requestOptions )
+        await fetch( "http://127.0.0.1:8000/listar-alergias-matricula/" + id, requestOptions )
             .then( response => response.json() )
             .then( result => {
                 for ( iten in result )
