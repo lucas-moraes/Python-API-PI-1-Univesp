@@ -25,10 +25,9 @@ instalação de packages:
         
         Depois, ir na pasta connection, e no arquivo database.py colocar o caminho que está o arquivo do banco de dados.
 
-    Para rodar o uvicorn no usando cmd do windows:
-        Entrar na pasta que está o projeto
-        cd backend        
-        python -m uvicorn view:app
+    Para rodar o uvicorn no usando cmd do windows:    
+        Na pasta do projeto
+            python run_backend.py
 
     Para arquivos python no ubuntu:
         python3.8 ...
@@ -41,7 +40,7 @@ instalação de packages:
 # Frontend ----------------------------------------------------------#
     Para rodar o Flask é preciso fazer os passos abaixo:
         Na pasta do projeto:
-        python index.py
+            python run_backend.py
 
     https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application
 
