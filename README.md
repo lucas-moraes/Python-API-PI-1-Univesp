@@ -30,6 +30,8 @@ Atualmente o governo não possui um sistema integrado de banco de dados para cad
 
 A solução encontrada foi o desenvolvimento de um sistema de API (Application Programming Interface), onde são disponibilizados rotinas e padrões para a utilização do banco de dados do SUS. Desta forma, os órgãos de saúde podem acessar dados relevantes do Paciente e incrementar com consultas realizadas independente de serem unidades públicas ou privadas.
 
+<img src="https://user-images.githubusercontent.com/50468352/141718925-cb064f9b-79a7-482c-890a-f50e8ea09151.png" />
+
 ---
 
 ---
