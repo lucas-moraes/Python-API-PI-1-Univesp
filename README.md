@@ -61,6 +61,15 @@ A solução encontrada foi o desenvolvimento de um sistema de API (Application P
  </br>
  </br>
  
+ Instalar as packages:
+ </br>
+ Na raiz do projeto:
+ </br>
+ <code>pip freeze > requeriments.txt</code>
+ </br>
+ <code> pip install -r requeriments.txt</code>
+ </br>
+ 
 |<b>Atenção ! os arquivos devem estar rodando juntos para o sistema funcionar corretamente</b>                         |
 |:-------------------------------------------------------------------------------------------------------------------|
 |<b>Backend</b>                                                                                                      |
