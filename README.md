@@ -20,6 +20,8 @@
 
 Atualmente o governo não possui um sistema integrado de banco de dados para cadastrar informações de saúde dos cidadãos desde o seu nascimento, de forma que possa ser usado e alimentado pelos estados e municípios e outros entes privados. Atuando de forma preventiva no tratamento à doenças.
 
+<img src="https://user-images.githubusercontent.com/50468352/141718680-891f561c-32c1-43b9-92b7-4504a5f41190.png" />
+
 ---
 
 ---
