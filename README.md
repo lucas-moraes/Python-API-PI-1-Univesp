@@ -63,7 +63,7 @@ A solução encontrada foi o desenvolvimento de um sistema de API (Application P
  
 |<b>Backend</b>                                                                                                      |
 |:-------------------------------------------------------------------------------------------------------------------|
-|Criar o banco de dados </br></br> &#9658; Pelo prompt acessar a pasta db e rodar o camando <code>python create_db.py</code> </br>&#9658; Acessar o arquivo backend > connection > database.py e colocar o caminho do arquivo que foi criado </br> &#9658; Na pasta raiz do projeto rodar o comando <code>python run_backend.py</code> </br></br> <img src="https://user-images.githubusercontent.com/50468352/141826405-742f3883-be44-42cf-9db3-750d626fc8a0.png" />|
+|Criar o banco de dados </br></br> &#9658; Pelo prompt acessar a pasta db e rodar o camando <code>python create_db.py</code> </br>&#9658; Acessar o arquivo backend > connection > database.py e colocar o caminho do arquivo que foi criado </br> &#9658; Na pasta raiz do projeto rodar o comando <code>python run_backend.py</code> </br></br> <img src="https://user-images.githubusercontent.com/50468352/141858998-26c41f23-d2ec-4c0e-a58b-1fc805ca56c3.png" />|
 | |
 </details>  
 
