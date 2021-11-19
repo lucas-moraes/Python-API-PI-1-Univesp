@@ -1,11 +1,24 @@
 from fastapi import FastAPI
-from controllers import get_controller
-from controllers import post_controller
-from controllers import delete_controller
-from controllers import update_controller
+from fastapi import responses
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from backend.controllers import get_controller
+from backend.controllers import post_controller
+from backend.controllers import delete_controller
+from backend.controllers import update_controller
 from pydantic import BaseModel
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/')
@@ -30,40 +43,40 @@ def ListarAlergias():
         do = get_controller.Get()
         lista = do.ListarTodasAlergias()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"response": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
-@app.post('/listar-alergias-matricula/')
+@app.post('/listar-alergias-matricula/{matricula_sus}')
 def ListarAlergias(matricula_sus: int):
     try:
         do = post_controller.Search()
         lista = do.ListarAlergiasPorMatricula(matricula_sus)
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"response": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
-@app.post('/listar-alergias-id/')
+@app.post('/listar-alergias-id/{id}')
 def ListarAlergiasPodId(id: int):
     try:
         do = post_controller.Search()
         lista = do.ListarAlergiasPorId(id)
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"response": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/inserir-alergia')
@@ -76,9 +89,9 @@ def InserirAlergia(inserir: Alergias):
         )
         if response is False:
             return {"response": "Alergia depende do Paciente"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-alergia')
@@ -88,9 +101,9 @@ def EditarAlergia(id: int, desc: str):
         response = do.EditarAlergia(id, desc)
         if response is False:
             return {"response": "Edição não realizada"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-alergia/{id}')
@@ -100,9 +113,9 @@ def DeletarAlergia(id: int):
         response = do.DeletarAlergia(id)
         if response is False:
             return {"response": "Exclusão não realizada"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 #----------------------------------------#
@@ -126,40 +139,40 @@ def ListarConsultas():
         do = get_controller.Get()
         lista = do.ListarTodasConsultas()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"atenção": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
-@app.post('/listar-consultas-matricula/')
+@app.post('/listar-consultas-matricula/{matricula_sus}')
 def ListarConsultasPorMatricula(matricula_sus: int):
     try:
         do = post_controller.Search()
         lista = do.ListarConsultasPorMatricula(matricula_sus)
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"response": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
-@app.post('/listar-consultas-id/')
+@app.post('/listar-consultas-id/{id}')
 def ListarConsultasPodId(id: int):
     try:
         do = post_controller.Search()
         lista = do.ListarConsultasPorId(id)
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"response": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/inserir-consulta')
@@ -176,9 +189,9 @@ def InserirConsulta(inserir: Consultas):
         )
         if response is False:
             return {"response": "Consulta depende do Paciente, Local de atendimento, medicos e especialidade médica"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-consulta')
@@ -196,9 +209,9 @@ def EditarConsulta(id: int, edit: Consultas):
         )
         if response is False:
             return {"response": "Edição não realizada"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-consulta/{id}')
@@ -208,9 +221,9 @@ def DeletarConsulta(id: int):
         response = do.DeletarConsulta(id)
         if response is False:
             return {"response": "Edição não realizada"}
-        return {"response": "Executado com sucesso!"}
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 #----------------------------------------#
@@ -229,12 +242,26 @@ def ListarEspecialidadesMedicas():
         do = get_controller.Get()
         lista = do.ListarTodasEspecialidadesMedicas()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"atenção": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
+
+
+@app.post('/listar-especialidade-medica-id/{id}')
+def ListarEspecialidadeMedicaPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarEspecialidadeMedicaPorId(id)
+        if lista is False:
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
+        elif (lista is None):
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
+        return lista
+    except:
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/listar-especialidade-medica-id/')
@@ -259,10 +286,10 @@ def InserirEspecialidadMedica(post: EspecialidadeMedica):
             post.desc_especialidade
         )
         if response is False:
-            return {"response": "Erro Interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-especialidade-medica')
@@ -271,10 +298,10 @@ def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica):
         do = update_controller.Update()
         response = do.EditarEspecialidadeMedica(id, edit.desc_especialidade)
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-especialidade-medica/{id}')
@@ -283,10 +310,10 @@ def DeletarEspecialidadeMedica(id: int):
         do = delete_controller.Delete()
         response = do.DeletarEspecialidadeMedica(id)
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 #----------------------------------------#
@@ -311,12 +338,26 @@ def ListarLocalAtendimento():
         do = get_controller.Get()
         lista = do.ListarTodosLocalAtendimento()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"atenção": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
+
+
+@app.post('/listar-local-atendimento-id/{id}')
+def ListarLocalAtendimentoPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarLocalAtendimentoPorId(id)
+        if lista is False:
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
+        elif (lista is None):
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
+        return lista
+    except:
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/listar-local-atendimento-id/')
@@ -347,10 +388,10 @@ def InserirLocalAtendimento(post: LocalAtendimento):
             post.uf
         )
         if response is False:
-            return {"response": "Erro Interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-local-atendimento')
@@ -369,10 +410,10 @@ def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
         )
         print('ok')
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-local-atendimento/{id}')
@@ -381,10 +422,10 @@ def DeletarEspecialidadeMedica(id: int):
         do = delete_controller.Delete()
         response = do.DeletarLocalAtendimento(id)
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 #----------------------------------------#
 #                                        #
@@ -412,12 +453,26 @@ def ListarMedicos():
         do = get_controller.Get()
         lista = do.ListarTodosMedicos()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"atenção": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
+
+
+@app.post('/listar-medicos-id/{id}')
+def ListarMedicosPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarMedicosPorId(id)
+        if lista is False:
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
+        elif (lista is None):
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
+        return lista
+    except:
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/listar-medicos-id/')
@@ -451,10 +506,10 @@ def InserirMedico(post: Medicos):
             post.id_especialidade_medica
         )
         if response is False:
-            return {"response": "Erro Interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-medico')
@@ -475,10 +530,10 @@ def EditarMedico(id: int, edit: Medicos):
             edit.id_especialidade_medica
         )
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-medico/{id}')
@@ -487,10 +542,10 @@ def DeletarMedico(id: int):
         do = delete_controller.Delete()
         response = do.DeletarMedico(id)
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 #----------------------------------------#
 #                                        #
@@ -520,12 +575,40 @@ def ListarPacientes():
         do = get_controller.Get()
         lista = do.ListarTodosPacientes()
         if lista is False:
-            return {"response": "Erro na consulta"}
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
         elif (lista is None):
-            return {"atenção": "Lista vazia"}
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
         return lista
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
+
+
+@app.post('/listar-paciente-matricula/{matricula_sus}')
+def ListarPacientePorMatricula(matricula_sus: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarPacientesPorMatricula(matricula_sus)
+        if lista is False:
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
+        elif (lista is None):
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
+        return lista
+    except:
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
+
+
+@app.post('/listar-pacientes-id/{id}')
+def ListarPacientesPodId(id: int):
+    try:
+        do = post_controller.Search()
+        lista = do.ListarPacientesPorId(id)
+        if lista is False:
+            return JSONResponse(status_code=404, content={"message": "Erro na consulta"})
+        elif (lista is None):
+            return JSONResponse(status_code=404, content={"message": "Não encontrado"})
+        return lista
+    except:
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.post('/listar-paciente-matricula/')
@@ -575,10 +658,10 @@ def InserirPaciente(post: Pacientes):
             post.uf
         )
         if response is False:
-            return {"response": "Erro Interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.put('/editar-paciente')
@@ -601,10 +684,10 @@ def EditarPaciente(id: int, edit: Pacientes):
             edit.uf
         )
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})
 
 
 @app.delete('/deletar-paciente/{id}')
@@ -613,7 +696,7 @@ def DeletarPaciente(id: int):
         do = delete_controller.Delete()
         response = do.DeletarPaciente(id)
         if response is False:
-            return {"response": "Erro interno"}
-        return {"response": "Executado com sucesso!"}
+            return JSONResponse(status_code=404, content={"message": "Erro na resposta"})
+        return JSONResponse(status_code=200, content={"message": "Executado com sucesso"})
     except:
-        return {"response": "Erro na execução"}
+        return JSONResponse(status_code=404, content={"message": "Erro na execução"})

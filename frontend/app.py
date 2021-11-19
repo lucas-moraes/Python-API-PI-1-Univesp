@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def Home():
-    return render_template('home.html')
+def Consulta():
+    return render_template('consulta.html', pagename="consulta")
 
 
 @app.route('/listas')
@@ -47,8 +47,3 @@ def Listas():
         local_atendimento.append(iten)
 
     return render_template('listas.html', pacientes=pacientes, consultas=consultas, medicos=medicos, especialidades_medicas=especialidades_medicas, local_atendimento=local_atendimento)
-
-
-if __name__ == "__main__":
-    from waitress import serve
-    serve(app.run(), host='127.0.0.1', port=6000)
