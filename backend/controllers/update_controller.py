@@ -4,6 +4,7 @@ from backend.model import especialidade_medica_model
 from backend.model import local_atendimento_model
 from backend.model import medicos_model
 from backend.model import pacientes_model
+from typing import Any
 
 
 class Update:
@@ -12,7 +13,7 @@ class Update:
     def EditarAlergia(
         id_alergias,
         descricao
-    ):
+    ) -> Any:
         do = alergias_model.Alergias()
         response = do.EditarAlergia(
             id_alergias,
@@ -29,7 +30,7 @@ class Update:
         id_medico,
         id_local_atendimento,
         compareceu
-    ):
+    ) -> Any:
         do = consultas_model.Consultas()
         response = do.EditarConsulta(
             id_consultas,
@@ -46,7 +47,7 @@ class Update:
     def EditarEspecialidadeMedica(
         id_especialidade_medica,
         desc_especialidade
-    ):
+    ) -> Any:
         do = especialidade_medica_model.Alergias()
         response = do.EditarEspecialidadeMedica(
             id_especialidade_medica,
@@ -64,7 +65,7 @@ class Update:
         cep,
         cidade,
         uf
-    ):
+    ) -> Any:
         do = local_atendimento_model.LocalAtendimento()
         response = do.EditarLocalAtendimento(
             id_local_atendimento,
@@ -91,7 +92,7 @@ class Update:
         cidade,
         uf,
         id_especialidade_medica
-    ):
+    ) -> Any:
         do = medicos_model.Medicos()
         response = do.EditarMedico(
             id,
@@ -123,7 +124,7 @@ class Update:
         cep,
         cidade,
         uf
-    ):
+    ) -> Any:
         do = pacientes_model.Pacientes()
         response = do.EditarPaciente(
             id,

@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi import responses
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from backend.controllers import get_controller
@@ -7,6 +6,8 @@ from backend.controllers import post_controller
 from backend.controllers import delete_controller
 from backend.controllers import update_controller
 from pydantic import BaseModel
+from typing import List
+
 
 app = FastAPI()
 
@@ -38,7 +39,7 @@ class Alergias(BaseModel):
 
 
 @app.get('/listar-alergias')
-def ListarAlergias():
+def ListarAlergias() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodasAlergias()
@@ -52,7 +53,7 @@ def ListarAlergias():
 
 
 @app.post('/listar-alergias-matricula/{matricula_sus}')
-def ListarAlergias(matricula_sus: int):
+def ListarAlergias(matricula_sus: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarAlergiasPorMatricula(matricula_sus)
@@ -66,7 +67,7 @@ def ListarAlergias(matricula_sus: int):
 
 
 @app.post('/listar-alergias-id/{id}')
-def ListarAlergiasPodId(id: int):
+def ListarAlergiasPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarAlergiasPorId(id)
@@ -80,7 +81,7 @@ def ListarAlergiasPodId(id: int):
 
 
 @app.post('/inserir-alergia')
-def InserirAlergia(inserir: Alergias):
+def InserirAlergia(inserir: Alergias) -> List:
     try:
         do = post_controller.Insert()
         response = do.InserirAlergia(
@@ -95,7 +96,7 @@ def InserirAlergia(inserir: Alergias):
 
 
 @app.put('/editar-alergia')
-def EditarAlergia(id: int, desc: str):
+def EditarAlergia(id: int, desc: str) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarAlergia(id, desc)
@@ -107,7 +108,7 @@ def EditarAlergia(id: int, desc: str):
 
 
 @app.delete('/deletar-alergia/{id}')
-def DeletarAlergia(id: int):
+def DeletarAlergia(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarAlergia(id)
@@ -134,7 +135,7 @@ class Consultas(BaseModel):
 
 
 @app.get('/listar-consultas')
-def ListarConsultas():
+def ListarConsultas() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodasConsultas()
@@ -148,7 +149,7 @@ def ListarConsultas():
 
 
 @app.post('/listar-consultas-matricula/{matricula_sus}')
-def ListarConsultasPorMatricula(matricula_sus: int):
+def ListarConsultasPorMatricula(matricula_sus: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarConsultasPorMatricula(matricula_sus)
@@ -162,7 +163,7 @@ def ListarConsultasPorMatricula(matricula_sus: int):
 
 
 @app.post('/listar-consultas-id/{id}')
-def ListarConsultasPodId(id: int):
+def ListarConsultasPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarConsultasPorId(id)
@@ -176,7 +177,7 @@ def ListarConsultasPodId(id: int):
 
 
 @app.post('/inserir-consulta')
-def InserirConsulta(inserir: Consultas):
+def InserirConsulta(inserir: Consultas) -> List:
     try:
         iten = post_controller.Insert()
         response = iten.InserirConsulta(
@@ -195,7 +196,7 @@ def InserirConsulta(inserir: Consultas):
 
 
 @app.put('/editar-consulta')
-def EditarConsulta(id: int, edit: Consultas):
+def EditarConsulta(id: int, edit: Consultas) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarConsulta(
@@ -215,7 +216,7 @@ def EditarConsulta(id: int, edit: Consultas):
 
 
 @app.delete('/deletar-consulta/{id}')
-def DeletarConsulta(id: int):
+def DeletarConsulta(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarConsulta(id)
@@ -237,7 +238,7 @@ class EspecialidadeMedica(BaseModel):
 
 
 @app.get('/listar-especialidades-medicas')
-def ListarEspecialidadesMedicas():
+def ListarEspecialidadesMedicas() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodasEspecialidadesMedicas()
@@ -251,7 +252,7 @@ def ListarEspecialidadesMedicas():
 
 
 @app.post('/listar-especialidade-medica-id/{id}')
-def ListarEspecialidadeMedicaPodId(id: int):
+def ListarEspecialidadeMedicaPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarEspecialidadeMedicaPorId(id)
@@ -265,7 +266,7 @@ def ListarEspecialidadeMedicaPodId(id: int):
 
 
 @app.post('/inserir-especialidade-medica')
-def InserirEspecialidadMedica(post: EspecialidadeMedica):
+def InserirEspecialidadMedica(post: EspecialidadeMedica) -> List:
     try:
         do = post_controller.Insert()
         response = do.InserirEspecialidadeMedica(
@@ -279,7 +280,7 @@ def InserirEspecialidadMedica(post: EspecialidadeMedica):
 
 
 @app.put('/editar-especialidade-medica')
-def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica):
+def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarEspecialidadeMedica(id, edit.desc_especialidade)
@@ -291,7 +292,7 @@ def EditarEspecialidadeMedica(id: int, edit: EspecialidadeMedica):
 
 
 @app.delete('/deletar-especialidade-medica/{id}')
-def DeletarEspecialidadeMedica(id: int):
+def DeletarEspecialidadeMedica(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarEspecialidadeMedica(id)
@@ -319,7 +320,7 @@ class LocalAtendimento(BaseModel):
 
 
 @app.get('/listar-local-atendimento')
-def ListarLocalAtendimento():
+def ListarLocalAtendimento() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodosLocalAtendimento()
@@ -333,7 +334,7 @@ def ListarLocalAtendimento():
 
 
 @app.post('/listar-local-atendimento-id/{id}')
-def ListarLocalAtendimentoPodId(id: int):
+def ListarLocalAtendimentoPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarLocalAtendimentoPorId(id)
@@ -347,7 +348,7 @@ def ListarLocalAtendimentoPodId(id: int):
 
 
 @app.post('/inserir-local-atendimento')
-def InserirLocalAtendimento(post: LocalAtendimento):
+def InserirLocalAtendimento(post: LocalAtendimento) -> List:
     try:
         do = post_controller.Insert()
         response = do.InserirLocalAtendiemnto(
@@ -367,7 +368,7 @@ def InserirLocalAtendimento(post: LocalAtendimento):
 
 
 @app.put('/editar-local-atendimento')
-def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
+def EditarLocalAtendimento(id: int, edit: LocalAtendimento) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarLocalAtendimento(
@@ -389,7 +390,7 @@ def EditarLocalAtendimento(id: int, edit: LocalAtendimento):
 
 
 @app.delete('/deletar-local-atendimento/{id}')
-def DeletarEspecialidadeMedica(id: int):
+def DeletarEspecialidadeMedica(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarLocalAtendimento(id)
@@ -420,7 +421,7 @@ class Medicos(BaseModel):
 
 
 @app.get('/listar-medicos')
-def ListarMedicos():
+def ListarMedicos() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodosMedicos()
@@ -434,7 +435,7 @@ def ListarMedicos():
 
 
 @app.post('/listar-medicos-id/{id}')
-def ListarMedicosPodId(id: int):
+def ListarMedicosPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarMedicosPorId(id)
@@ -448,7 +449,7 @@ def ListarMedicosPodId(id: int):
 
 
 @app.post('/inserir-medico')
-def InserirMedico(post: Medicos):
+def InserirMedico(post: Medicos) -> List:
     try:
         do = post_controller.Insert()
         response = do.InserirMedico(
@@ -471,7 +472,7 @@ def InserirMedico(post: Medicos):
 
 
 @app.put('/editar-medico')
-def EditarMedico(id: int, edit: Medicos):
+def EditarMedico(id: int, edit: Medicos) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarMedico(
@@ -495,7 +496,7 @@ def EditarMedico(id: int, edit: Medicos):
 
 
 @app.delete('/deletar-medico/{id}')
-def DeletarMedico(id: int):
+def DeletarMedico(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarMedico(id)
@@ -528,7 +529,7 @@ class Pacientes(BaseModel):
 
 
 @app.get('/listar-pacientes')
-def ListarPacientes():
+def ListarPacientes() -> List:
     try:
         do = get_controller.Get()
         lista = do.ListarTodosPacientes()
@@ -542,7 +543,7 @@ def ListarPacientes():
 
 
 @app.post('/listar-paciente-matricula/{matricula_sus}')
-def ListarPacientePorMatricula(matricula_sus: int):
+def ListarPacientePorMatricula(matricula_sus: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarPacientesPorMatricula(matricula_sus)
@@ -556,7 +557,7 @@ def ListarPacientePorMatricula(matricula_sus: int):
 
 
 @app.post('/listar-pacientes-id/{id}')
-def ListarPacientesPodId(id: int):
+def ListarPacientesPodId(id: int) -> List:
     try:
         do = post_controller.Search()
         lista = do.ListarPacientesPorId(id)
@@ -570,7 +571,7 @@ def ListarPacientesPodId(id: int):
 
 
 @app.post('/inserir-paciente')
-def InserirPaciente(post: Pacientes):
+def InserirPaciente(post: Pacientes) -> List:
     try:
         do = post_controller.Insert()
         response = do.InserirPaciente(
@@ -595,7 +596,7 @@ def InserirPaciente(post: Pacientes):
 
 
 @app.put('/editar-paciente')
-def EditarPaciente(id: int, edit: Pacientes):
+def EditarPaciente(id: int, edit: Pacientes) -> List:
     try:
         do = update_controller.Update()
         response = do.EditarPaciente(
@@ -621,7 +622,7 @@ def EditarPaciente(id: int, edit: Pacientes):
 
 
 @app.delete('/deletar-paciente/{id}')
-def DeletarPaciente(id: int):
+def DeletarPaciente(id: int) -> List:
     try:
         do = delete_controller.Delete()
         response = do.DeletarPaciente(id)

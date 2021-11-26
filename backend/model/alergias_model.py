@@ -1,11 +1,12 @@
 import sqlite3
 import backend.connection.database as database
+from typing import Any
 
 
 class Alergias:
 
     @staticmethod
-    def ListarTodos():
+    def ListarTodos() -> Any:
         try:
             query_string = "SELECT rowid, * FROM alergias"
             connection = database.connect()
@@ -18,7 +19,7 @@ class Alergias:
             return False
 
     @staticmethod
-    def ListarPorId(id):
+    def ListarPorId(id) -> Any:
         try:
             query_string = (
                 "SELECT rowid, * FROM alergias WHERE rowid = " + str(id)
@@ -33,7 +34,7 @@ class Alergias:
             return False
 
     @staticmethod
-    def ListarPorMatricula(matricula_sus):
+    def ListarPorMatricula(matricula_sus) -> Any:
         try:
             query_string = (
                 "SELECT * FROM alergias where matricula_sus = " +
@@ -49,7 +50,7 @@ class Alergias:
             return False
 
     @staticmethod
-    def InserirAlergia(matricula_sus, descricao):
+    def InserirAlergia(matricula_sus, descricao) -> Any:
         try:
             query_string = (
                 "INSERT INTO alergias (matricula_sus, descricao) VALUES (" +
@@ -65,7 +66,7 @@ class Alergias:
             return False
 
     @staticmethod
-    def EditarAlergia(id_alergias, descricao):
+    def EditarAlergia(id_alergias, descricao) -> Any:
         try:
             query_string = (
                 "UPDATE alergias SET descricao = '" +
@@ -82,7 +83,7 @@ class Alergias:
             return False
 
     @staticmethod
-    def DeletarAlergia(id_alergia):
+    def DeletarAlergia(id_alergia) -> Any:
         try:
             query_string = (
                 "DELETE FROM alergias WHERE rowid = " + str(id_alergia)
